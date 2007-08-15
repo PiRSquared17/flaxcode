@@ -1,0 +1,10 @@
+#summary List of other software similar to Flax
+
+= Other Search Engines =
+
+Here is a list of other search engines (in no particular order):
+
+  * [http://searchblox.com searchblox]
+  * [http://www.ultraseek.com/ ultraseek]
+
+
