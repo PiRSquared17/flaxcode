@@ -27,7 +27,7 @@ This is a list of milestones for Flax 1.0, vaguely described. Things may well ch
     * HTML.
     * MS Word.
     * MS Excel.
-    * MS PowerPoint.
+    * MS Power Point.
     * PDF.
 
  * D6 - Document Collection Design.
@@ -59,7 +59,6 @@ This is a list of milestones for Flax 1.0, vaguely described. Things may well ch
 
  * D14 - Complete system
     * Flax system 1.0 completion
-
 
 
 
