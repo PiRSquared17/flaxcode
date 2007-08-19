@@ -5,7 +5,7 @@
 
 For this milestone we will develop:
 
-  *  A set of HTML templates, using [http://freespace.virgin.net/hamish.sanderson/htmltemplate.html HTMLTemplates] showing the main pages of the Flax web front end. 
+  *  A set of HTML templates, using [http://freespace.virgin.net/hamish.sanderson/htmltemplate.html HTMLTemplate] showing the main pages of the Flax web front end. 
 
   * Some CSS to make the pages look reasonable (although the intention here is not to have production ready CSS, but something that's usable during the rest of the development of Flax 1.0
 
