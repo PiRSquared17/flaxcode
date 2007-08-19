@@ -6,7 +6,7 @@ This is a list of milestones for Flax 1.0, vaguely described. Things may well ch
 
 = Details =
 
- * D1 - Prototype web front end 
+ * [D1] - Prototype web front end 
     * HTMLTemplate files for the main Flax web pages.
     * CSS for layout/styling of the HTML.
     * Python to render the templates as HTML for viewing in a browser.
