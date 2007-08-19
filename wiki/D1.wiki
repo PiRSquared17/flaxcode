@@ -24,4 +24,19 @@ We will need at least the following web pages for Flax administrators (in no spe
 
   * Global settings page which shows, and allows for modification, of all the global settings of the system.
 
-       
+  * Log viewing page(s). 
+
+For end users we need:
+
+  * Simple query page - enter a search query and submit it.
+  * Advanced query page - Submit a complex query using a form that helps build the query.
+  * Search results page.
+
+
+
+As far as possible the pages will have a consistent look and feel out
+of the box and incluing a navigation bar for ease of moving between
+pages. The pages will allow for customization by adminstrators, either
+by changing the CSS or editing the templates themselves.
+
+
