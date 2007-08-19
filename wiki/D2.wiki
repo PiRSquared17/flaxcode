@@ -1,0 +1,17 @@
+#summary Description of milestone D2 for Flax 1.0
+
+= D2: Web Server =
+
+For this milestone we will develop a web server that serves the pages
+generated from the templates developed in [D1]. Administrator pages
+and functionality will protected by HTTP authentication.
+
+We will use one of twisted.web, twisted.web2, nevow or CherryPy for
+the basic web serving functionaly. (This needs to be nailed down).
+
+The web server will contain stubbs for funcationalty to be written as
+part of other milestones.
+
+
+
+

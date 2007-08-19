@@ -11,7 +11,7 @@ This is a list of milestones for Flax 1.0, vaguely described. Things may well ch
     * CSS for layout/styling of the HTML.
     * Python to render the templates as HTML for viewing in a browser.
 
- * D2 - Web server
+ * [D2] - Web server
     * Python code for serving the web pages from D1. 
     * The code will contain stubs for functionality to be implemented as part of later milestones.
 
