@@ -6,5 +6,7 @@ Here is a list of other search engines (in no particular order):
 
   * [http://searchblox.com searchblox]
   * [http://www.ultraseek.com/ ultraseek]
-  * [http://www.thunderstone.com/texis/site/pages/webinator.html webinator]
+  * [http://www.thunderstone.com/texis/site/pages/webinator.html
+    webinator] ( a review is
+    [http://www.searchtools.com/analysis/webinator-review.html here])
 
