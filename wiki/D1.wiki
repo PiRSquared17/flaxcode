@@ -1,6 +1,6 @@
 #summary Description of milestone D1 for Flax 1.0
 
--== D1: Prototype Web Front End ==-
+= D1: Prototype Web Front End =
 
 
 For this milestone we will develop:
