@@ -4,7 +4,20 @@
 
 Here is a list of other search engines (in no particular order):
 
-  * [http://searchblox.com searchblox]
-  * [http://www.ultraseek.com/ ultraseek]
-  * [http://www.thunderstone.com/texis/site/pages/webinator.html webinator] ( a review is [http://www.searchtools.com/analysis/webinator-review.html here])
+Commercial, closed-source:
+ * [http://www.ultraseek.com/ Autonomy Ultraseek]
+ * [http://www.thunderstone.com/texis/site/pages/webinator.html webinator] ( a review is [http://www.searchtools.com/analysis/webinator-review.html here])
+ * [http://www.google.co.uk/enterprise/ Google Search Appliance]
+ * [http://autonomy.com/content/Products/index.en.html Autonomy IDOL]
+ * [http://www.grapeshot.co.uk Grapeshot] 
+ * [http://www.aprsmartlogik.com Smartlogik] (uses Muscat)
+ * [http://www.convera.com/ Convera]
+ * [http://www.fastsearch.com/ FAST]
 
+Open-source:
+ * [http://lucene.apache.org/solr/ Solr] (Lucene based)
+ * [http://www.kneobase.com/ Kneobase] (press release [http://www.theserverside.com/news/thread.tss?thread_id=40160 here]).
+
+Mixed model:
+ * [http://searchblox.com searchblox] (Lucene based)
+ * [http://omnifind.ibm.yahoo.net/ Yahoo/IBM Omnifind] (Lucene based)
