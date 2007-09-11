@@ -9,10 +9,8 @@ filter.
 Filters might be badly behaved, particularly in the presence of bad
 data. We want to take reasonable care that a problem in running a
 filter over one document does not compromise the system as a whole. We
-shoudl therefore include the capability to terminate filters that
+should therefore include the capability to terminate filters that
 (apparently) fail to terminate, crash or raise exceptions.
-
-
 
 
 = Document Filters =
@@ -87,8 +85,7 @@ example] of using IFilters via COM in the python windows extensions [http://sour
 
 Note also that the
 [http://starship.python.net/crew/theller/wiki/the_comtypes_package
-comtypes] might give a simpler way of acheiving something similar.
-
+comtypes] might give a simpler way of achieving something similar.
 
 === Ctypes === 
 
