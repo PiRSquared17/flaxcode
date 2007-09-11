@@ -88,6 +88,50 @@ It should be possible to call directly into IFilter DLLS using
 Ctypes. This might buy us some performance over going through the com
 machinery, but might be more hassle that it's worth.
 
+== Other document parsers ==
+
+We want to be able to use other filters as well as [IFilters]. In
+particular xapian has it's own HTML parser that we will probably want
+to use.
+
+We also will need non-IFilter mechanisms for parsing documents on
+non-Windows platforms. The formats that are likely to give the most
+trouble are MS Office. [http://www.winfield.demon.nl/ Antiword] is one
+way of extracting text from word documents. Also
+[http://www.openoffice.org/ OpenOffice] can parse MS Office documents
+and also has python bindings, which can be used to extract text - see
+[http://udk.openoffice.org/python/samples/ooextract.py this] example.
+
+Other common document formats that are likely to be of interest are
+Open Office itself, PDF (supported by an Adobe IFilter on Windows) for
+which there are a number of cross platform libraries.
+
+== A framework for filtering ==
+
+
+=== Mapping formats to filters ===
+
+In order to support many different filters we should document some
+interfaces allowing us to wrap different document parsers so that we
+can use them for indexing documents. Given a document it is first
+necessary to decide which filter to use. To support this we can make a
+class, say FormatRegister, that provides facilities for mapping files
+to filters. This could be implemented in terms of a dictionary mapping
+regular expressions to a filter factory (which could just be a python
+class). When a file matches the regular expression a filter for of the
+correspondong type (e.g. class instance) is created.
+
+=== Generic filtering interface ===
+
+In the first instance we want to keep things very simple. We want to
+use text to fill in xapian fields, so at the minumum we need something
+that takes a file and returns pairs of field names and text. In the
+first instance this should be adequate - a filter factory is any
+python object that takes a filename and returns an iterator that
+yields (field_name, text) pairs.
+
+
+
 = Controlling document filter execution =
 
 Richard writes:
@@ -101,4 +145,5 @@ Richard writes:
     than starting a filter process for every document.  This might be
     the appropriate architecture on other systems too.  Obviously,
     we'll need to have some kind of IPC to talk to this sub-process.
+
 
