@@ -1,0 +1,112 @@
+#summary Flax Document Filters Implementation.
+
+= Introduction =
+
+Flax needs to get text from documents to feed it to Xapian. We will
+call something that performs this role a document filter, or just
+filter. 
+
+Filters might be badly behaved, particularly in the presence of bad
+data. We want to take reasonable care that a problem in running a
+filter over one document does not compromise the system as a whole. We
+shoudl therefore include the capability to terminate filters that
+(apparently) fail to terminate, crash or raise exceptions.
+
+
+
+
+= Document Filters =
+
+It is not practicable (or especially desirable) to write our own
+filters for all the document formats we want to support. Therefore we
+will use third party software for extracting text from some kinds of
+document. Whilst we will support a limited set of formats for version
+1.0, we hope to add support for more formats. Whilst it is not a
+specific requirement it would be nice if administrators could
+configure Flax to use  their own filters.
+
+== IFilters ==
+
+On Windows the [http://msdn2.microsoft.com/en-us/library/ms691105.aspx
+IFilter] interface is designed for this kind of application. There are
+some filters implementing this interface for a number of common
+document types. IFilters are part of the Windows Index Service see
+http://msdn2.microsoft.com/en-us/library/aa163263.aspx.
+
+There is a mechanism for determining which filter to use on a given
+file. The SDK functions
+[http://msdn2.microsoft.com/en-us/library/ms691002.aspx LoadIFilter],
+[http://msdn2.microsoft.com/en-us/library/ms690929.aspx
+BindIFilterFromStorage] and
+[http://msdn2.microsoft.com/en-us/library/ms690827.aspx
+BindIFilterFromStream] all use information in the registry to
+determine which registered filter to use with a particular file. (I
+guess that in theory this can be circumvented and the corresponding
+filter dll can be loaded and accessed directly.)
+
+The filter interface is flexible and appears to work like this. You
+repeatedly call `IFilter::GetChunk`, yielding some
+[http://msdn2.microsoft.com/en-us/library/ms691016.aspx `STAT_CHUNK`]
+data. This provides some information about the current chunk, in
+particular the `flags` property, or type
+[http://msdn2.microsoft.com/en-us/library/ms691020.aspx `CHUNKSTATE`]
+tells you whether the chunk is text or some other kind of data. If it
+is text (`CHUNK_TEXT` is set) then you can call `IFilter::GetText` to
+get the text from the current chunk. (Note that each chunk of text can
+have a different locale , so from this perspective language is not
+per-document, but per-chunk.) `STAT_CHUNK` also has a property
+`attribute` which gives more information about the chunk, which
+provides for mapping chunk contents to particular xapian fields.
+
+
+
+The chunk may additionally, or alternatively have `CHUNK_VALUE`
+set. In this case you can call `IFilter::GetValue` to get the
+value. This can yield any kind of data. Presumably this is intended
+for things like embedded binary data (e.g. images) in documents. It
+could be that there is useful text embedded with these chunks, but the
+practicability of extracting the text depends on determining the
+format of the data and having a filter for such data. In the first
+instance it might be wise to ignore value chunks and see what kind of
+results we get by just looking at text chunks.
+
+There are some code
+[http://msdn2.microsoft.com/en-us/library/ms689723.aspx samples] that
+may be worth examining.
+
+== IFilters from Python ==
+
+We need to figure out how to access third party IFilters functionality
+from Flax.
+
+=== COM ===
+
+There is an
+[http://pywin32.cvs.sourceforge.net/pywin32/pywin32/com/win32comext/ifilter/demo/filterDemo.py?view=markup&sortdir=down
+example] of using IFilters via COM in the python windows extensions [http://sourceforge.net/projects/pywin32/ distribution].
+
+Note also that the
+[http://starship.python.net/crew/theller/wiki/the_comtypes_package
+comtypes] might give a simpler way of acheiving something similar.
+
+
+=== Ctypes === 
+
+It should be possible to call directly into IFilter DLLS using
+Ctypes. This might buy us some performance over going through the com
+machinery, but might be more hassle that it's worth.
+
+= Controlling document filter execution =
+
+Richard writes:
+
+    This may involve running filters in separate processes, to avoid
+    the whole application being taken down by broken filters.  On
+    windows, if I understand correctly, the equivalent of fork() is
+    very expensive, so we'll probably have to have a long-running
+    process which calls the filters, which is managed by the main
+    indexing process, and restarted automatically when it dies, rather
+    than starting a filter process for every document.  This might be
+    the appropriate architecture on other systems too.  Obviously,
+    we'll need to have some kind of IPC to talk to this sub-process.
+
