@@ -180,7 +180,7 @@ functionality we would need for the ipc stuff in a fairly clean way,
 as well as having useful configuration options that would be somewhat
 time consuming to roll ourselves.
 
-We can ensure that our indexer retarts if it falls over with a simple
+We can ensure that our indexer restarts if it falls over with a simple
 windows shell script: e.g.
 
 {{{
