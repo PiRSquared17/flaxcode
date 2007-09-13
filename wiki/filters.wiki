@@ -77,7 +77,7 @@ from Flax.
 === COM ===
 
 There is an
-[http://pywin32.cvs.sourceforge.net/pywin32/pywin32/com/win32comext/ifilter/demo/filterDemo.py?view=markup&sortdir=down example] of using IFilters via COM in the python windows extensions [http://sourceforge.net/projects/pywin32/ distribution].
+[http://pywin32.cvs.sourceforge.net/pywin32/pywin32/com/win32comext/ifilter/demo/filterDemo.py?view=markup&sortdir=down example] of using IFilters via COM in the python windows extensions [http://sourceforge.net/projects/pywin32/ distribution]. I have written a simple [http://flaxcode.googlecode.com/svn/trunk/src/w32com_ifilter.py filter] that we can perhaps adapt to give us what we want.
 
 Note also that the
 [http://starship.python.net/crew/theller/wiki/the_comtypes_package comtypes] might give a simpler way of achieving something similar.
@@ -131,6 +131,12 @@ python object that takes a filename and returns an iterator that
 yields (field_name, text) pairs.
 
 
+One whether we fix the field names that we process in advance. One
+diffculty is that different ifilter can give quite different
+fields. We could (at least for version 1) decide on a fixed set of
+field names that we are interested in and then let each filter map
+data back to those names.
+
 
 = Controlling document filter execution =
 
@@ -147,3 +153,42 @@ Richard writes:
     we'll need to have some kind of IPC to talk to this sub-process.
 
 
+
+From the administrators perspective we want to provide options
+determining the frequency and timing of document collection indexing.
+Indexing itself it potentially time consuming and error prone, so we
+intend to use a separate process to do the actual indexing. Obviously
+we need some kind of communication of indexing scheduling options
+between the Flax server itself and the indexing service.
+
+Since the Flax server itself maintains state about when and how things
+are indexed it probably makes sense not duplicate this in the indexer
+since this would create syncronization issues if the indexer dies, but
+pass information across when indexing is required.
+
+This means that the scheduler lives is part of the main Flax server,
+so we need to check how we can schedule within the main cherrypy loop.
+
+The server has no guarantee that the indexer will ever finish a
+particular indexing request, so should assume that after some given
+(configurable) time interval that the indexing has failed
+catastrophically (i.e. no information about the failure is
+available). 
+
+[http://pyro.sourceforge.net Pyro] seems to offer the kind of
+functionality we would need for the ipc stuff in a fairly clean way,
+as well as having useful configuration options that would be somewhat
+time consuming to roll ourselves.
+
+We can ensure that our indexer retarts if it falls over with a simple
+windows shell script: e.g.
+
+{{{
+:LOOP
+python -c "import indexer; indexer.run()" %*
+echo.
+echo  *********** Flax Indexer Stopped, restarting now, hit <CONTROL>-<BREAK> to stop ********
+echo.
+sleep 4
+goto LOOP
+}}}
