@@ -1,0 +1,93 @@
+#summary This document describes how Flax extracts text from documents.
+
+= Introduction =
+
+Flax must extract text from documents in order to feed it to
+Xapian. Since it is hard to know all the document formats that people
+might want to be able to search we want to allow for new parsers for
+given document formats to be installed with the minimum of difficulty.
+
+= Filters = 
+
+Xapian (the search engine underlying Flax) has a notion of "fields"
+for documents. Fields can be used to enhance searches by specifying
+the fields within which we wish to search, or by attaching extra
+significance to terms found in particular fields.
+
+A document filter takes a filename (in future version this will be
+generalised to a URI) and returns an iterator that yields `(fieldname,
+text)` pairs.  Where `fieldname` names the field to which the `text`
+is to be added. Each such pair is referred to as a "block" for
+`fieldname`.
+
+Both `fieldname` and `text` can be any string, however for a filter to
+make the most of the Flax infrastructure it should be implemented with
+the points below in mind.
+
+== Fields ==
+
+Flax only takes note of a certain predefined fields, as mentioned
+below. Filters may emit blocks for other fields, but blocks for such
+fields will be treated as if they were `content` blocks. Future
+releases of Flax will provide an infrastructure for defining the
+treatment of arbitrary field blocks.
+
+Flax does little checking of the blocks returned by filters, and will
+tolerate significant deviation from the guidelines below (checking
+would slow down the indexing process), but if filters do not follow
+these guidelines then the quality of search results might be
+lessened. The filters that are distributed as part of Flax all comply
+with these guidelines.
+
+The fields that Flax notices are as follows:
+
+  * `title`: The document title. Ideally there should be exactly one
+    block for this field. If there is no block for this then Flax will
+    provide a default block based on either the filename, uri or
+    initial block emitted by the filter.
+
+  * `keyword`: A keyword for the document. The content for each block
+     should be a single word.
+
+  * `content`: Text for the main contents of the document. `content`
+    blocks should be emitted in paragraphs. Phrase and adjacency
+    searches take note of paragraphs. For example, if a filter emits
+    blocks: `('content', 'Aardvark ')` followed by `('content',
+    'soup')`, then a search for the phrase `"Aardvark soup"` will
+    fail. However if a filter emits `('content', 'Aardvark soup')`
+    then the same search will succeed.
+
+  * `description`: The document's description. Filters may emit
+    several blocks for this field. Text should be emitted in
+    paragraphs.
+
+Note that the flax infrastructure uses the following fields. Filters
+should not emit blocks for these:
+
+  * `filename`: The operating system filename for the file.  
+
+  * `uri`: uri for the file (not currently used, but reserved for
+    future use).
+
+= Discus ion = 
+
+== Simplicity considerations ==
+
+For version 1.0 of Flax a relatively simple Filter interface is
+defined.  In the future a mechanism for defining the treatment of
+blocks for other fields will be provided. The issue is essentially one
+of determining what the appropriate Xapian field actions for each
+field, and providing user interface components to interact with fields
+that are not known in advance.
+
+== Efficiency considerations ==
+
+We could code to enforce the guidelines, but this adds a burden both to
+the Flax infrastructure and to the authors of filters.
+
+Implementing filters as iterators allows for reasonable memory use for
+large files - there is no need for filter implementations to hold all
+of a file in memory, and there is no need for Flax or Xapian to hold
+more than a block at a time in memory.
+
+
