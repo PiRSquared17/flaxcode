@@ -73,7 +73,7 @@ should not emit blocks for these:
 
 == Simplicity considerations ==
 
-For version 1.0 of Flax a relatively simple Filter interface is
+For version 1.0 of Flax a relatively simple filter interface is
 defined.  In the future a mechanism for defining the treatment of
 blocks for other fields will be provided. The issue is essentially one
 of determining what the appropriate Xapian field actions for each
