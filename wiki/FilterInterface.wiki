@@ -69,7 +69,7 @@ should not emit blocks for these:
   * `uri`: uri for the file (not currently used, but reserved for
     future use).
 
-= Discus ion = 
+= Discussion = 
 
 == Simplicity considerations ==
 
