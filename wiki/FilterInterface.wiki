@@ -15,8 +15,8 @@ the fields within which we wish to search, or by attaching extra
 significance to terms found in particular fields.
 
 A document filter takes a filename (in future version this will be
-generalised to a URI) and returns an iterator that yields `(fieldname,
-text)` pairs.  Where `fieldname` names the field to which the `text`
+generalised to a URI) and returns an iterator that yields `(fieldname, text)` pairs. 
+Where `fieldname` names the field to which the `text`
 is to be added. Each such pair is referred to as a "block" for
 `fieldname`.
 
@@ -52,8 +52,8 @@ The fields that Flax notices are as follows:
   * `content`: Text for the main contents of the document. `content`
     blocks should be emitted in paragraphs. Phrase and adjacency
     searches take note of paragraphs. For example, if a filter emits
-    blocks: `('content', 'Aardvark ')` followed by `('content',
-    'soup')`, then a search for the phrase `"Aardvark soup"` will
+    blocks: `('content', 'Aardvark ')` followed by `('content', 'soup')`, 
+    then a search for the phrase `"Aardvark soup"` will
     fail. However if a filter emits `('content', 'Aardvark soup')`
     then the same search will succeed.
 
