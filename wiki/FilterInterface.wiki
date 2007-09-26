@@ -69,6 +69,9 @@ should not emit blocks for these:
   * `uri`: uri for the file (not currently used, but reserved for
     future use).
 
+  * `mtime`: the time the database document was created (not the
+    creation time of the source file) i.e. the time of last indexing.
+
 = Discussion = 
 
 == Simplicity considerations ==
