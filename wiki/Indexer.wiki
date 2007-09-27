@@ -1,4 +1,4 @@
-# summary Flax indexing system
+#summary Flax indexing system
 
 = Flax Indexing = 
 
