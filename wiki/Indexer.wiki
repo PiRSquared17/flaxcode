@@ -1,0 +1,76 @@
+# summary Flax indexing system
+
+= Flax Indexing = 
+
+In order to build Xapian databases from the files specified by a
+document collection Flax has a process that runs separately from the
+main web server. This has some advantages:
+
+  * Badly behaved document filters invoked by the indexing process
+    need not adversely affect the running of the main web server.
+
+  * The indexer could run on a separate machine from the web server if
+    desired to improve performance.
+
+
+The indexer exposes a method called `do_indexing` which can be called
+remotely using [Pyro http://pyro.sourceforge.net/].
+
+It is desirable that there's no long term state held in the indexer,
+so that at worst the current indexing process can be forecably
+terminated and restarted, so `do_indexing` should be called passing in
+all the information required to perform indexing of a document
+collection. In order to work with the underlying Pyro infrastructure
+the data so passed must be picklable. We pass:
+
+  * A document collection object.
+  
+  * A dictionary mapping file extentions to filters.
+
+  * A callback to be invoked when the indexing has finished.
+
+The indexer requires that the document collection provides an iterable
+via its `files()` method then will yield all the (absolute) filenames
+for the collection.
+
+The indexer must, for each file, 
+
+  * determine whether there is a document for the file already in the
+    xapian database for the collection and, if so, determine whether
+    the file has changed since the document was created.
+
+  * When necessary invoke the appopriate filter and put the resulting
+    data in a document, which will replace the current document. We
+    use the filename as the xapian id for the document, so we can
+    easily see the correspondence between documents and files.
+
+  * Remove any documents from the database that do not have a
+    corresponding file.
+
+Note that the indexer is independent of the actual data yielded by
+filters. For each `(fieldname, data)` pair is adds the `data` to the
+field named by `fieldname`. See [FilterInterface] for a description of
+the data filters should yield.
+
+In normal operation on termintaion the indexer will call the supplied
+callback (remotely) to inform the caller that the indexing was
+successful. Callers should be prepared for the possibility that the
+callback might never get invoked.
+
+= Dealing with problems =
+
+We should be prepared for the possibility that a filter will loop
+forever, raise unexpected exceptions, or place unacceptable demands on
+system resources - e.g. memory. In the worst case an indexer might
+crash the whole indexer process.
+
+The indexer process can be invoked by a shell script that simply loops
+(giving an option to quit with some keyboard input). This deals with
+the case where the process terminates. To deal with the other
+situation we can pass each filter invocation off to a seperate thread
+and periodically monitor memory usage and elapsed time, killing the
+thread if predetermined limits are exceeded. It's not entirely clear
+to me how we kill a given thread in python, but we can can at least
+call sys.exit in the main thread if limits have been exceeded and
+allow the restarting mechanism mentioned above to restart the indexer.
+
