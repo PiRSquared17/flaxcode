@@ -17,11 +17,8 @@ This is a list of milestones for Flax 1.0, vaguely described. Things may well ch
 
  * D3 - Filter system design
 
-    * A document describing the interface for document filters:
-      [FilterInterface].
-
-    * A document describing how Flax will run document filters:
-      [Indexer].
+     - A document describing the interface for document filters: [FilterInterface].
+     - A document describing how Flax will run document filters: [Indexer].
 
  * D4 - Filter System Implementation
     * Python code implementing the designs from D3
