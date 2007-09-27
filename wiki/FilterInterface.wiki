@@ -72,6 +72,11 @@ should not emit blocks for these:
   * `mtime`: the time the database document was created (not the
     creation time of the source file) i.e. the time of last indexing.
 
+  * `collection`: the document collection that the document belongs
+    too. (Note that the same source file might form part of different
+    document settings, but this will give rise to different (xapian)
+    documents within the document collection databases.)
+
 = Discussion = 
 
 == Simplicity considerations ==
@@ -93,4 +98,16 @@ large files - there is no need for filter implementations to hold all
 of a file in memory, and there is no need for Flax or Xapian to hold
 more than a block at a time in memory.
 
+== Future ==
+
+We discussed in irc that it may be desirable to change the one-to-one
+mapping from files to Xapian documents that we currently have. For
+example, if a file is actually an archive of some sort we might want
+it to yield document data for each contained file (possibly
+recursively since an archive might contain other archives.)
+
+The current design could be adapted to this kind of situation by
+specifying that a filter yields `(docname, docdata-iterator)` were
+each `docdata-generator` yields blocks as per the current
+specification.
 
