@@ -1,6 +1,3 @@
-Content-Type: text/enriched
-Text-Width: 70
-
 #summary Flax Document Filters Implementation.
 
 
@@ -119,6 +116,4 @@ and also has python bindings, which can be used to extract text - see
 Other common document formats that are likely to be of interest are
 Open Office itself, PDF (supported by an Adobe IFilter on Windows) for
 which there are a number of cross platform libraries.
-
-
 
