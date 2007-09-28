@@ -1,0 +1,131 @@
+Content-Type: text/enriched
+Text-Width: 70
+
+#summary outline of the role of document collections in Flax
+
+
+= Introduction =
+
+
+The document collection (or just "collection" when clear from context)
+is a central notion in Flax. A collection is a specification of a set
+of documents. For Flax 1.0 this is simply a set of files, but for
+future versions will include things like a set of urls. A collection
+also specifies some aspects of how, and when, it's constituent
+documents are indexed.
+
+
+== Files Specification ==
+
+
+The set of files for a collection can be specified by providing:
+
+
+  * A set of paths. Each path stand for (recursively) all the files
+  below it if it is a directory, or itself if it is a regular file.
+
+
+  * A set of formats. This is used to denote the types of files in the
+  collection.
+
+
+  * An ealiest date and a latest date. These are used to limit the
+  modification dates of files in the collection.
+
+
+  * A youngest and oldest duration. These are used to limit the age of
+  the files in the collection at the time of indexing.
+
+
+ 
+
+The files of the collection at a given indexing time are then every
+file `f` such that:
+
+
+  * `f` is in a directory below a path on the path set, or f is in the path set; and
+
+
+  * `f` is of one of the formats in the set of formats; and
+
+
+  * `f` was modified on or after the earliest date; and
+
+
+  * `f` was modified on or before the latest date; and
+
+
+  * `f` is older than the youngest duration; and
+
+
+  * `f` is younger than the oldest duration.
+
+
+
+
+=== Discussion ===
+
+
+We do not have an explicit exclusions property - i.e. subdirectories
+of paths that should be skipped. Maybe we should?
+
+
+
+== Indexing Specification ==
+
+
+The results obtained from Xapian searches depend, in part, on options set for
+the database. The indexing of the collection is influence by the following settings:
+
+
+  * language: This effects how stemming works for documents in the
+    collection. See the Xapian
+    [http://www.xapian.org/docs/stemming.html stemming] discusion for
+    more detail.
+
+
+    
+
+  * stopwords: Words that are ignored when indexing.
+
+
+
+== Scheduling Specification ==
+
+
+The documents of a collection must be processed and the resulting data
+added to a xapian database in order for searches to be
+performed. Indexing is relatively expensive so should not be performed
+more often than needed. On the other hand the real user requrement
+will normally be to search the actual files of the collection, not the
+files at the last time they were indexed, so indexing should happend
+sufficiently often so that the database is not badly out of sync with
+the files of the collections.
+
+
+The scheduling options control how frequently a collection is
+indexed. (The web application also allows that indexing is requested
+on demand, so it is possible to have a usable system without any
+scheduled indexings.) The scheduling specification for a collection
+has the following properties. (Ranges are from and including, to and
+excluding).
+
+
+(This is essentially a simplified
+[http://en.wikipedia.org/wiki/Crontab crontab] entry.)
+
+
+
+  * minutes: a list of numbers in the range 0-60
+
+  * hours: a list of numbers in the range 0-24
+
+  * days of month: a list of numbers in the range 0-31
+
+  * months: a list of number in the range 0-12
+
+
+In addition each of these properties may have the value `*`. The
+system will ensure that indexing is requested at times. `*` means all
+and numbers mean the corresponding date or time component.
+
