@@ -1,6 +1,3 @@
-Content-Type: text/enriched
-Text-Width: 70
-
 #summary Milestones for version 1.0 of Flax
 
 
@@ -81,4 +78,3 @@ This is a list of milestones for Flax 1.0, vaguely described. Things may well ch
 
  * D14 - Complete system
     * Flax system 1.0 completion
-
