@@ -41,7 +41,7 @@ This is a list of milestones for Flax 1.0, vaguely described. Things may well ch
     * PDF.
 
 
- * D6 - Document Collection Design.
+ * [D6] - Document Collection Design.
     * Constituent documents specification (i.e. how we select documents of the collection - paths, formats, exclusions, date (and age) ranges).
     * Indexing.
     * Scheduling of indexing.
