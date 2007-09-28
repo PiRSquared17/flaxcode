@@ -1,46 +1,53 @@
+Content-Type: text/enriched
+Text-Width: 70
+
 #summary Flax Document Filters Implementation.
+
 
 = Introduction =
 
-Flax needs to get text from documents to feed it to Xapian. We will
-call something that performs this role a document filter, or just
-filter. 
 
-Filters might be badly behaved, particularly in the presence of bad
-data. We want to take reasonable care that a problem in running a
-filter over one document does not compromise the system as a whole. We
-should therefore include the capability to terminate filters that
-(apparently) fail to terminate, crash or raise exceptions.
+FilterInterface describes the interface that we expect filters to
+implement. For version 1.0 we intend to support at least the following
+document formats on windows:
 
 
-= Document Filters =
+  * Plain text.
+  * HTML.
+  * MS Word.
+  * MS Excel.
+  * MS Power Point.
+  * PDF.
 
-It is not practicable (or especially desirable) to write our own
-filters for all the document formats we want to support. Therefore we
-will use third party software for extracting text from some kinds of
-document. Whilst we will support a limited set of formats for version
-1.0, we hope to add support for more formats. Whilst it is not a
-specific requirement it would be nice if administrators could
-configure Flax to use  their own filters.
 
-== IFilters ==
+It is possible to do this on widows with a single filter that hooks
+into the Windows Indexing Service infrastuture.
 
-On Windows the [http://msdn2.microsoft.com/en-us/library/ms691105.aspx IFilter] interface is designed for this kind of application. There are
-some filters implementing this interface for a number of common
-document types. IFilters are part of the Windows Index Service see
+
+== IFilter Background ==
+
+
+The [http://msdn2.microsoft.com/en-us/library/ms691105.aspx IFilter]
+interface is designed for this kind of application. There are some
+filters implementing this interface for a number of common document
+types. IFilters are part of the Windows Index Service see
 http://msdn2.microsoft.com/en-us/library/aa163263.aspx.
+
 
 There is a mechanism for determining which filter to use on a given
 file. The SDK functions
 [http://msdn2.microsoft.com/en-us/library/ms691002.aspx LoadIFilter],
-[http://msdn2.microsoft.com/en-us/library/ms690929.aspx BindIFilterFromStorage] and
-[http://msdn2.microsoft.com/en-us/library/ms690827.aspx BindIFilterFromStream] all use information in the registry to
-determine which registered filter to use with a particular file. (I
-guess that in theory this can be circumvented and the corresponding
-filter dll can be loaded and accessed directly.)
+[http://msdn2.microsoft.com/en-us/library/ms690929.aspx
+BindIFilterFromStorage] and
+[http://msdn2.microsoft.com/en-us/library/ms690827.aspx
+BindIFilterFromStream] all use information in the registry to
+determine which registered filter to use with a particular file. (It
+is possible to directly load the dlls, but we do not need to do so now
+so this is not discussed further.)
 
-The filter interface is flexible and appears to work like this. You
-repeatedly call `IFilter::GetChunk`, yielding some
+
+The filter interface is flexible and appears to work roughly as
+follows. Repeated calls `IFilter::GetChunk`, return
 [http://msdn2.microsoft.com/en-us/library/ms691016.aspx `STAT_CHUNK`]
 data. This provides some information about the current chunk, in
 particular the `flags` property, or type
@@ -54,142 +61,64 @@ per-document, but per-chunk.) `STAT_CHUNK` also has a property
 provides for mapping chunk contents to particular xapian fields.
 
 
-
 The chunk may additionally, or alternatively have `CHUNK_VALUE`
-set. In this case you can call `IFilter::GetValue` to get the
-value. This can yield any kind of data. Presumably this is intended
-for things like embedded binary data (e.g. images) in documents. It
-could be that there is useful text embedded with these chunks, but the
-practicability of extracting the text depends on determining the
-format of the data and having a filter for such data. In the first
-instance it might be wise to ignore value chunks and see what kind of
-results we get by just looking at text chunks.
+set. In this case calling `IFilter::GetValue` gets the value. This can
+yield any kind of data.  It could be that there is useful text
+embedded with these chunks, but the practicability of extracting the
+text depends on determining the format of the data and having a filter
+for such data. In the first instance it might be wise to ignore value
+chunks and see what kind of results we get by just looking at text
+chunks.
+
 
 There are some code
 [http://msdn2.microsoft.com/en-us/library/ms689723.aspx samples] that
 may be worth examining.
 
-== IFilters from Python ==
 
-We need to figure out how to access third party IFilters functionality
-from Flax.
+== Flax filter using IFilters ==
 
-=== COM ===
 
 There is an
-[http://pywin32.cvs.sourceforge.net/pywin32/pywin32/com/win32comext/ifilter/demo/filterDemo.py?view=markup&sortdir=down example] of using IFilters via COM in the python windows extensions [http://sourceforge.net/projects/pywin32/ distribution]. I have written a simple [http://flaxcode.googlecode.com/svn/trunk/src/w32com_ifilter.py filter] that we can perhaps adapt to give us what we want.
+[http://pywin32.cvs.sourceforge.net/pywin32/pywin32/com/win32comext/ifilter/demo/filterDemo.py?view=markup&sortdir=down
+example] of using IFilters via COM in the python windows extensions
+[http://sourceforge.net/projects/pywin32/ distribution]. This has been
+used as the basis of a
+[http://flaxcode.googlecode.com/svn/trunk/src/w32com_ifilter.py
+filter] conforming to FilterInterface.
 
-Note also that the
-[http://starship.python.net/crew/theller/wiki/the_comtypes_package comtypes] might give a simpler way of achieving something similar.
 
-=== Ctypes === 
 
-It should be possible to call directly into IFilter DLLS using
-Ctypes. This might buy us some performance over going through the com
-machinery, but might be more hassle that it's worth.
+== Simple Text Filter ==
 
-== Other document parsers ==
 
-We want to be able to use other filters as well as [IFilters]. In
-particular xapian has it's own HTML parser that we will probably want
-to use.
+For text document, for testing, and for non-windows platforms it is
+convenient to have a simple filter for text files. This has been
+[http://flaxcode.googlecode.com/svn/trunk/src/simple_text_filter.py
+implemented].
 
-We also will need non-IFilter mechanisms for parsing documents on
-non-Windows platforms. The formats that are likely to give the most
+
+
+== Other document filters ==
+
+
+Xapian has it's own HTML parser that we will probably want to use for
+filtering HTML (although on Windows the ifilter filter will of course
+deal with HTML).
+
+
+Eventually we will need non-IFilter mechanisms for parsing documents
+on non-Windows platforms. The formats that are likely to give the most
 trouble are MS Office. [http://www.winfield.demon.nl/ Antiword] is one
 way of extracting text from word documents. Also
 [http://www.openoffice.org/ OpenOffice] can parse MS Office documents
 and also has python bindings, which can be used to extract text - see
 [http://udk.openoffice.org/python/samples/ooextract.py this] example.
 
+
 Other common document formats that are likely to be of interest are
 Open Office itself, PDF (supported by an Adobe IFilter on Windows) for
 which there are a number of cross platform libraries.
 
-== A framework for filtering ==
 
-
-=== Mapping formats to filters ===
-
-In order to support many different filters we should document some
-interfaces allowing us to wrap different document parsers so that we
-can use them for indexing documents. Given a document it is first
-necessary to decide which filter to use. To support this we can make a
-class, say FormatRegister, that provides facilities for mapping files
-to filters. This could be implemented in terms of a dictionary mapping
-regular expressions to a filter factory (which could just be a python
-class). When a file matches the regular expression a filter for of the
-correspondong type (e.g. class instance) is created.
-
-=== Generic filtering interface ===
-
-In the first instance we want to keep things very simple. We want to
-use text to fill in xapian fields, so at the minumum we need something
-that takes a file and returns pairs of field names and text. In the
-first instance this should be adequate - a filter factory is any
-python object that takes a filename and returns an iterator that
-yields (field_name, text) pairs.
-
-
-One whether we fix the field names that we process in advance. One
-diffculty is that different ifilter can give quite different
-fields. We could (at least for version 1) decide on a fixed set of
-field names that we are interested in and then let each filter map
-data back to those names.
-
-
-= Controlling document filter execution =
-
-Richard writes:
-
-    This may involve running filters in separate processes, to avoid
-    the whole application being taken down by broken filters.  On
-    windows, if I understand correctly, the equivalent of fork() is
-    very expensive, so we'll probably have to have a long-running
-    process which calls the filters, which is managed by the main
-    indexing process, and restarted automatically when it dies, rather
-    than starting a filter process for every document.  This might be
-    the appropriate architecture on other systems too.  Obviously,
-    we'll need to have some kind of IPC to talk to this sub-process.
-
-
-
-From the administrators perspective we want to provide options
-determining the frequency and timing of document collection indexing.
-Indexing itself it potentially time consuming and error prone, so we
-intend to use a separate process to do the actual indexing. Obviously
-we need some kind of communication of indexing scheduling options
-between the Flax server itself and the indexing service.
-
-Since the Flax server itself maintains state about when and how things
-are indexed it probably makes sense not duplicate this in the indexer
-since this would create syncronization issues if the indexer dies, but
-pass information across when indexing is required.
-
-This means that the scheduler lives is part of the main Flax server,
-so we need to check how we can schedule within the main cherrypy loop.
-
-The server has no guarantee that the indexer will ever finish a
-particular indexing request, so should assume that after some given
-(configurable) time interval that the indexing has failed
-catastrophically (i.e. no information about the failure is
-available). 
-
-[http://pyro.sourceforge.net Pyro] seems to offer the kind of
-functionality we would need for the ipc stuff in a fairly clean way,
-as well as having useful configuration options that would be somewhat
-time consuming to roll ourselves.
-
-We can ensure that our indexer restarts if it falls over with a simple
-windows shell script: e.g.
-
-{{{
-:LOOP
-python -c "import indexer; indexer.run()" %*
-echo.
-echo  *********** Flax Indexer Stopped, restarting now, hit <CONTROL>-<BREAK> to stop ********
-echo.
-sleep 4
-goto LOOP
-}}}
 
