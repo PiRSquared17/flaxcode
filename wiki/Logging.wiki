@@ -5,12 +5,11 @@
 
 This document discusses how Flax should do logging, and is essentially
 a summary of a conversation in irc. The standard Python logging
-[module http://docs.python.org/lib/module-logging.html] has good
+[http://docs.python.org/lib/module-logging.html module] has good
 functionality and it would be perverse not to use it unless we had a
 compelling reason to do otherwise.
 
-There is a detailed article on using the system [here
-http://www.red-dove.com/python_logging.html].
+There is a detailed article on using the system [http://www.red-dove.com/python_logging.html here].
 
 The configuration file for the logging system is very flexible, but we
 would like to allow some configuration to happen through the web
