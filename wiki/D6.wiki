@@ -76,9 +76,9 @@ the database. The indexing of the collection is influence by the following setti
 
 
   * language: This effects how stemming works for documents in the
-    collection. See the Xapian
-    [http://www.xapian.org/docs/stemming.html stemming] discusion for
-    more detail.
+  collection. See the Xapian
+  [http://www.xapian.org/docs/stemming.html stemming] discusion for
+  more detail.
 
 
     
