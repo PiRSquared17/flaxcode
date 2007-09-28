@@ -32,10 +32,10 @@ This is a list of milestones for Flax 1.0, vaguely described. Things may well ch
     
 
  * D4 - Filter System Implementation
-    * Python code implementing the designs from D3: [FilteringImplementation]
+    * Python code implementing the designs from D3.
 
 
- * D5 - Document filters
+ * D5 - Document filters:  [FilteringImplementation]
     * Plain text.
     * HTML.
     * MS Word.
@@ -81,6 +81,4 @@ This is a list of milestones for Flax 1.0, vaguely described. Things may well ch
 
  * D14 - Complete system
     * Flax system 1.0 completion
-
-
 
