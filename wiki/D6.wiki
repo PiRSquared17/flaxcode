@@ -1,6 +1,3 @@
-Content-Type: text/enriched
-Text-Width: 70
-
 #summary outline of the role of document collections in Flax
 
 
@@ -128,4 +125,3 @@ excluding).
 In addition each of these properties may have the value `*`. The
 system will ensure that indexing is requested at times. `*` means all
 and numbers mean the corresponding date or time component.
-
