@@ -18,20 +18,16 @@ documents are indexed.
 The set of files for a collection can be specified by providing:
 
 
-  * A set of paths. Each path stand for (recursively) all the files
-  below it if it is a directory, or itself if it is a regular file.
+  * A set of paths. Each path stands for (recursively) all the files below it if it is a directory, or itself if it is a regular file.
 
 
-  * A set of formats. This is used to denote the types of files in the
-  collection.
+  * A set of formats. This is used to denote the types of files in the collection.
 
 
-  * An ealiest date and a latest date. These are used to limit the
-  modification dates of files in the collection.
+  * An ealiest date and a latest date. These are used to limit the modification dates of files in the collection.
 
 
-  * A youngest and oldest duration. These are used to limit the age of
-  the files in the collection at the time of indexing.
+  * A youngest and oldest duration. These are used to limit the age of the files in the collection at the time of indexing.
 
 
  
@@ -75,13 +71,8 @@ The results obtained from Xapian searches depend, in part, on options set for
 the database. The indexing of the collection is influence by the following settings:
 
 
-  * language: This effects how stemming works for documents in the
-  collection. See the Xapian
-  [http://www.xapian.org/docs/stemming.html stemming] discusion for
-  more detail.
+  * language: This effects how stemming works for documents in the collection. See the Xapian [http://www.xapian.org/docs/stemming.html stemming] discusion for more detail.
 
-
-    
 
   * stopwords: Words that are ignored when indexing.
 
