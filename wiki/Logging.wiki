@@ -24,24 +24,13 @@ particular port for logging system configuration data.
 
 We therefore plan as follows:
 
-- Parts of Flax that generate logging output (currently the web server
-  and the indexer) listen for logging configuration changes using
-  logging.config.listen.
+  * Parts of Flax that generate logging output (currently the web server and the indexer) listen for logging configuration changes using logging.config.listen.
 
-- The web application includes a form (or forms) for setting certain
-  logging options. This form is populated by programmatically querying
-  the logging module for current settings. Form submission results in
-  re-writing some parts of the log file (for the options that we
-  provide for in the web app). Note that this does not directly change
-  the current logging settings.
+  * The web application includes a form (or forms) for setting certain logging options. This form is populated by programmatically querying the logging module for current settings. Form submission results in re-writing some parts of the log file (for the options that we provide for in the web app). Note that this does not directly change the current logging settings.
 
-- There is a separate, relatively simple, process that watches the
-  logging configuration file and, if it changes notifies any
-  listeners (i.e. the web server and the indexer).
+  * There is a separate, relatively simple, process that watches the logging configuration file and, if it changes notifies any listeners (i.e. the web server and the indexer).
 
 
 Only a subset of possible configuration options will be provided in
 the web application, but where more esoteric configuration is desired
 the fall-back of editing the log file directly remains.
-
-
