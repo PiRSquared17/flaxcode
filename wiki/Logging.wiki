@@ -41,4 +41,4 @@ This program has the following functionality.
 
 == Watching for file changes ==
 
-Unfortunately there doesn't seem to be a nice cross platform way to watch for changes, but at least on Linux there is [http://pyinotify.sourceforge.net/ pyinotify] and on windows some techniques  to achieve what we want: see [http://tgolden.sc.sabren.com/python/win32_how_do_i/watch_directory_for_changes.html here] and [http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/156178 here].
+Unfortunately there doesn't seem to be a nice cross platform way to watch for changes, but at least on Linux there is [http://pyinotify.sourceforge.net/ pyinotify] and [http://sourceforge.net/projects/python-fam/ python-fam] and on windows some techniques to achieve what we want: see [http://tgolden.sc.sabren.com/python/win32_how_do_i/watch_directory_for_changes.html here] and [http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/156178 here].
