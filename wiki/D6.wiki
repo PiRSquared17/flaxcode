@@ -88,6 +88,8 @@ The scheduling options control how frequently a collection is indexed. (The web 
 
   * hours: a list of numbers in the range 0-24
 
+  * days of week: a list of numbers in the range 0-31o
+
   * days of month: a list of numbers in the range 0-31
 
   * months: a list of number in the range 0-12
