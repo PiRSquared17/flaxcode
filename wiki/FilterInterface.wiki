@@ -15,98 +15,113 @@ the fields within which we wish to search, or by attaching extra
 significance to terms found in particular fields.
 
 A document filter takes a filename (in future version this will be
-generalised to a URI) and returns an iterator that yields `(fieldname, text)` pairs,
-where `fieldname` names the field to which the `text`
-is to be added. Each such pair is referred to as a "block" for
+generalised to a URI) and returns an iterator that yields `(fieldname, value)` pairs,
+where `fieldname` names the field to which the `value`
+is to be added. Each such pair may be referred to as a "block" for
 `fieldname`.
 
-Both `fieldname` and `text` can be any string, however for a filter to
+Both `fieldname` and `value` can be any string: however for a filter to
 make the most of the Flax infrastructure it should be implemented with
 the points below in mind.
 
 == Fields ==
 
 Flax only takes note of a certain predefined fields, as mentioned
-below. Filters may emit blocks for other fields, but blocks for such
-fields will be treated as if they were `content` blocks. Future
-releases of Flax will provide an infrastructure for defining the
-treatment of arbitrary field blocks.
+below. Filters should avoid emitting blocks for other fields:
+if a non-predefined field is emitted, a warning message will be placed
+in the indexing log, and the field text will be ignored.  An error will
+not be raised, so that indexing of the document can complete.
 
-Flax does little checking of the blocks returned by filters, and will
+This allows a filter designed for a different version of Flax to be used
+with a version of Flax which doesn't define a particular field, but avoids
+silently ignoring input data.
+
+Flax does minimal checking of the blocks returned by filters, and will
 tolerate significant deviation from the guidelines below (checking
-would slow down the indexing process), but if filters do not follow
+would slow down the indexing process, and make compatibility between
+versions of Flax harder), but if filters do not follow
 these guidelines then the quality of search results might be
 lessened. The filters that are distributed as part of Flax all comply
 with these guidelines.
 
 The fields that Flax notices are as follows:
 
-  * `title`: The document title. Ideally there should be exactly one
-    block for this field. If there is no block for this then Flax will
-    provide a default block based on either the filename, uri or
-    initial block emitted by the filter.
+  * `title`: The document title. Ideally there should be exactly one block for this field. If there is no block for this then Flax will provide a default block based on something like the filename, URI or first content block emitted by the filter (but filter writers shouldn't rely on any particular behaviour here).
 
-  * `keyword`: A keyword for the document. The content for each block
-     should be a single word.
+  * `content`: Text for the main contents of the document. `content` blocks should be emitted in paragraphs. Phrase and adjacency searches take note of paragraphs. For example, if a filter emits blocks: `('content', 'Aardvark ')` followed by `('content', 'soup')`, then a search for the phrase `"Aardvark soup"` will fail. However if a filter emits `('content', 'Aardvark soup')` then the same search will succeed.
 
-  * `content`: Text for the main contents of the document. `content`
-    blocks should be emitted in paragraphs. Phrase and adjacency
-    searches take note of paragraphs. For example, if a filter emits
-    blocks: `('content', 'Aardvark ')` followed by `('content', 'soup')`, 
-    then a search for the phrase `"Aardvark soup"` will
-    fail. However if a filter emits `('content', 'Aardvark soup')`
-    then the same search will succeed.
+  * `description`: General descriptive text about the document. Filters may emit several blocks for this field. Text should be emitted in paragraphs.
 
-  * `description`: The document's description. Filters may emit
-    several blocks for this field. Text should be emitted in
-    paragraphs.
+  * `keyword`: A keyword for the document. The content for each block should be a single word.  FIXME - what's expected to go in this block?  Should it be removed?
 
-Note that the flax infrastructure uses the following fields. Filters
+Note that the Flax infrastructure uses the following fields. Filters
 should not emit blocks for these:
 
-  * `filename`: The operating system filename for the file.  
+  * `filename`: The operating system filename for the file (only used for local files)
 
-  * `uri`: uri for the file (not currently used, but reserved for
-    future use).
+  * `uri`: URI for the file (not currently used, but reserved for future use).
 
-  * `mtime`: the time the database document was created (not the
-    creation time of the source file) i.e. the time of last indexing.
+  * `mtime`: the time the database document was created (not the creation time of the source file) i.e. the time of last indexing.
 
-  * `collection`: the document collection that the document belongs
-    too. (Note that the same source file might form part of different
-    document settings, but this will give rise to different (xapian)
-    documents within the document collection databases.)
+  * `collection`: the document collection that the document belongs too. (Note that the same source file might form part of different document settings, but this will give rise to different (Xapian) documents within the document collection databases.)
 
 = Discussion = 
 
 == Simplicity considerations ==
 
 For version 1.0 of Flax a relatively simple filter interface is
-defined.  In the future a mechanism for defining the treatment of
-blocks for other fields will be provided. The issue is essentially one
-of determining what the appropriate Xapian field actions for each
-field, and providing user interface components to interact with fields
-that are not known in advance.
+defined.  It's easier for us to add new field definitions in future than to
+remove field definitions (due to backwards compatibility issues).
 
 == Efficiency considerations ==
 
-We could code to enforce the guidelines, but this adds a burden both to
-the Flax infrastructure and to the authors of filters.
+We don't enforce the guidelines listed above.  Partly, this is because
+filters are reasonably trusted pieces of code, so there is no real risk
+from not enforcing the guidelines.  In any case, enforcing them would
+add a burden both to the Flax infrastructure and to the authors of filters,
+and could make it harder to use filters designed for one version of Flax in
+versions of Flax with different standard fields.
 
 Implementing filters as iterators allows for reasonable memory use for
 large files - there is no need for filter implementations to hold all
-of a file in memory, and there is no need for Flax or Xapian to hold
-more than a block at a time in memory.
+of a file in memory, and there is no need for Flax to hold
+more than a block at a time in memory.  However, note that Xapian needs to build
+up a complete representation of a document in memory before it can be indexed,
+so very large documents are always going to require a reasonably large
+amount of memory.
 
 == Future ==
 
-We discussed in irc that it may be desirable to change the one-to-one
+=== Multiple documents per file ===
+
+It may be desirable to change the one-to-one
 mapping from files to Xapian documents that we currently have. For
 example, if a file is actually an archive of some sort we might want
 it to yield document data for each contained file (possibly
-recursively since an archive might contain other archives.)
+recursively since an archive might contain other archives).  This could
+also be the situation if we support email mailboxes, in which each email
+message should be a separate document (possibly with attachments also as
+separate documents).
 
 The current design could be adapted to this kind of situation by
 specifying that a filter yields `(docname, docdata-iterator)` were
 each `docdata-generator` yields blocks as per the current
-specification.
+specification.  This could be implemented in a backwards compatible manner
+in various ways, so doesn't need further investigation at present.
+
+=== Custom field types ===
+
+In the future a mechanism for defining the treatment of
+blocks for other fields may be provided. The issue is essentially one
+of determining what the appropriate Xapian field actions for each
+field, and providing user interface components to interact with fields
+that are not known in advance.
+
+=== Separate out internal from external fields ===
+
+For tidiness, and to avoid a potential cause of confusing error messages,
+it would be nice to separate out internal fieldnames from external fieldnames.
+This would mean that, even if a filter emitted an "mtime" field, the value would
+be indexed differently from the internal "mtime" field.  This could be achieved
+by indexing the internal fields with a special prefix to distinguish them, or
+in various other ways.
