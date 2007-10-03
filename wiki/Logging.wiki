@@ -102,3 +102,7 @@ Messages about the operation of the simple text filter.
 
 Messages about the creation, deletion and modifications to document collections.
 
+
+=== scheduling ===
+
+Messages about the periodic scheduling of collection indexing.
