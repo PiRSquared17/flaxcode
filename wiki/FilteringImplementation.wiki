@@ -113,7 +113,12 @@ and also has python bindings, which can be used to extract text - see
 [http://udk.openoffice.org/python/samples/ooextract.py this] example.
 
 
+Xapian's "omindex" tool has support for indexing from lots of document
+formats using unix tools - we should copy at least some of the filter
+invocations it uses rather than figuring them out from scratch.  Mostly,
+these involve invoking a sub-process to perform the filtering.
+
+
 Other common document formats that are likely to be of interest are
 Open Office itself, PDF (supported by an Adobe IFilter on Windows) for
 which there are a number of cross platform libraries.
-
