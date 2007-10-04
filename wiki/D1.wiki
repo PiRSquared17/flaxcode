@@ -1,4 +1,5 @@
 #summary Description of milestone D1 for Flax 1.0
+#labels Status-Accepted,Phase-Design
 
 = D1: Prototype Web Front End =
 
@@ -22,9 +23,9 @@ We will need at least the following web pages for Flax administrators (in no spe
      * shows all available information about a collection;
      * provides mechanisms for changing all properties of collections (that can be changed)
 
-  * Global settings page which shows, and allows for modification, of all the global settings of the system.
+  * Global settings page which shows, and allows for modification, all the global settings of the system.
 
-  * Log viewing page(s). 
+  * Log viewing page(s).
 
 For end users we need:
 
@@ -33,10 +34,7 @@ For end users we need:
   * Search results page.
 
 
-
 As far as possible the pages will have a consistent look and feel out
 of the box and incluing a navigation bar for ease of moving between
 pages. The pages will allow for customization by adminstrators, either
 by changing the CSS or editing the templates themselves.
-
-
