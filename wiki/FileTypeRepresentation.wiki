@@ -1,4 +1,5 @@
 #summary How and why we will represent file types in flax
+#labels Status-Accepted,Phase-Design
 
 = Introduction =
 
