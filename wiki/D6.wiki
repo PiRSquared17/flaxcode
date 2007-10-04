@@ -1,5 +1,5 @@
 #summary outline of the role of document collections in Flax
-#labels Phase-Design,Status-NeedsWork
+#labels Phase-Design,Status-Accepted
 
 
 = Introduction =
@@ -52,16 +52,19 @@ file `f` such that:
 
 
 
-=== Discussion ===
+=== Symlinks ===
 
 
-FIXME - We need to state what we do with symlinks (on systems which support them).  ie, do we follow them if they go outside the list of paths specified?
+Symlinks are not followed.  If the target is inside the collection the target will be indexed anyway, and if the target isn't inside the collection, following symlinks could cause files to be indexed which the users meant to keep private. A warning will be emitted when symlinks are encountered.
 
 
 === Future Improvements ===
 
 
 We do not have an explicit exclusions property - i.e. subdirectories of paths that should be skipped. We don't need this for 1.0, but we should add it soon after.
+
+
+We might want to add an option to follow symlinks.  We also might want to make the warning about non-followed symlinks only be displayed if the target is not in the collection (but this is a hard condition to check in general)
 
 
 == Indexing Specification ==
