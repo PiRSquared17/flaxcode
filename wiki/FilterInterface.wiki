@@ -1,5 +1,5 @@
 #summary This document describes how Flax extracts text from documents.
-#labels Status-Accepted
+#labels Status-Accepted,Phase-Design
 
 = Introduction =
 
