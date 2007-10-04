@@ -1,4 +1,5 @@
 #summary outline of the role of document collections in Flax
+#labels Phase-Design,Status-NeedsWork
 
 
 = Introduction =
@@ -19,7 +20,7 @@ The set of files for a collection can be specified by providing:
   * A set of formats. This is used to denote the types of files in the collection.
 
 
-  * An ealiest date and a latest date. These are used to limit the modification dates of files in the collection.
+  * An earliest date and a latest date. These are used to limit the modification dates of files in the collection.
 
 
   * A youngest and oldest duration. These are used to limit the age of the files in the collection at the time of indexing.
@@ -54,8 +55,13 @@ file `f` such that:
 === Discussion ===
 
 
-We do not have an explicit exclusions property - i.e. subdirectories of paths that should be skipped. Maybe we should?
+FIXME - We need to state what we do with symlinks (on systems which support them).  ie, do we follow them if they go outside the list of paths specified?
 
+
+=== Future Improvements ===
+
+
+We do not have an explicit exclusions property - i.e. subdirectories of paths that should be skipped. We don't need this for 1.0, but we should add it soon after.
 
 
 == Indexing Specification ==
@@ -67,17 +73,22 @@ The results obtained from Xapian searches depend, in part, on options set for th
   * language: This effects how stemming works for documents in the collection. See the Xapian [http://www.xapian.org/docs/stemming.html stemming] discusion for more detail.
 
 
-  * stopwords: Words that are ignored when indexing.
+  * stopwords: Words that are ignored when indexing.  This may reduce the database size considerably, but does limit the kinds of searches which can be performed.
 
+
+=== Future Improvements ===
+
+
+After 1.0, we may wish to add support for multiple languages in a single collection.  However, at present, we will assume that each collection is in a single language.
 
 
 == Scheduling Specification ==
 
 
-The documents of a collection must be processed and the resulting data added to a xapian database in order for searches to be performed. Indexing is relatively expensive so should not be performed more often than needed. On the other hand the real user requrement will normally be to search the actual files of the collection, not the files at the last time they were indexed, so indexing should happend sufficiently often so that the database is not badly out of sync with the files of the collections.
+The documents of a collection must be processed and the resulting data added to a xapian database in order for searches to be performed. Indexing is relatively expensive so should not be performed more often than needed. On the other hand the real user requirement will normally be to search the actual files of the collection, not the files at the last time they were indexed, so indexing should happen sufficiently often that the database is not badly out of sync with the files of the collections.
 
 
-The scheduling options control how frequently a collection is indexed. (The web application also allows that indexing is requested on demand, so it is possible to have a usable system without any scheduled indexings.) The scheduling specification for a collection has the following properties. (Ranges are from and including, to and excluding).
+The scheduling options control how frequently a collection is indexed. (The web application also allows that indexing is requested on demand, so it is possible to have a usable system without any scheduled indexing.) The scheduling specification for a collection has the following properties. (Ranges are from and including, to and excluding).
 
 
 (This is essentially a simplified [http://en.wikipedia.org/wiki/Crontab crontab] entry.)
@@ -96,3 +107,11 @@ The scheduling options control how frequently a collection is indexed. (The web 
 
 
 In addition each of these properties may have the value `*`. The system will ensure that indexing is requested at times. `*` means all and numbers mean the corresponding date or time component.
+
+
+=== Future improvements ===
+
+
+We may wish to add a simple interface to the scheduler, allowing a few standard options to be chosen (eg, every "N" hours) without needing to design a full scheduling specification.
+
+We may wish to specify that indexing should happen only when system load (or perhaps, searches / hour) is below a certain level.
