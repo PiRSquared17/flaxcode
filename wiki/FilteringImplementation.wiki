@@ -1,4 +1,5 @@
 #summary Flax Document Filters Implementation.
+#labels Status-Accepted,Phase-Design
 
 
 = Introduction =
@@ -17,8 +18,10 @@ document formats on windows:
   * PDF.
 
 
-It is possible to do this on widows with a single filter that hooks
-into the Windows Indexing Service infrastuture.
+It is possible to do this on Windows with a single filter that hooks
+into the Windows Indexing Service infrastuture.  However, we'll probably use
+the Xapian HTML parser to handle HTML, since it is specially designed for this
+task.
 
 
 == IFilter Background ==
@@ -89,19 +92,27 @@ filter] conforming to FilterInterface.
 == Simple Text Filter ==
 
 
-For text document, for testing, and for non-windows platforms it is
+For text documents, for testing, and for non-windows platforms it is
 convenient to have a simple filter for text files. This has been
 [http://flaxcode.googlecode.com/svn/trunk/src/simple_text_filter.py
 implemented].
 
 
 
+== HTML Filter ==
+
+
+Xapian has a good HTML parser for extracting text (whilst ignoring extraneous
+information like <script> tags).  We will use this to build an HTML filter.  This
+is expected to give better results than the IFilter filter (and be more reliable:
+we've used the xapian HTML parser in many projects before, and know of no issues
+which cause it to hang, loop, or crash).
+
+The same code could be used to make a generic, but simple, XML filter.  We won't
+do this for 1.0, but it would be easy to add later.
+
+
 == Other document filters ==
-
-
-Xapian has it's own HTML parser that we will probably want to use for
-filtering HTML (although on Windows the ifilter filter will of course
-deal with HTML).
 
 
 Eventually we will need non-IFilter mechanisms for parsing documents
@@ -120,5 +131,5 @@ these involve invoking a sub-process to perform the filtering.
 
 
 Other common document formats that are likely to be of interest are
-Open Office itself, PDF (supported by an Adobe IFilter on Windows) for
+Open Office itself and PDF (supported by an Adobe IFilter on Windows) for
 which there are a number of cross platform libraries.
