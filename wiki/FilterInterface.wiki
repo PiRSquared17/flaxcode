@@ -52,7 +52,7 @@ The fields that Flax notices are as follows:
 
   * `description`: General descriptive text about the document. Filters may emit several blocks for this field. Text should be emitted in paragraphs.
 
-  * `keyword`: A keyword for the document. The content for each block should be a single word.  FIXME - what's expected to go in this block?  Should it be removed?
+  * `keyword`: A keyword for the document. The content for each block should be a single word describing the document.  Many document formats have a way to store keywords for a particular document, which users may use in various different ways - this field allows users to search based on them.
 
 Note that the Flax infrastructure uses the following fields. Filters
 should not emit blocks for these:
