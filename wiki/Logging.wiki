@@ -1,4 +1,5 @@
 #summary Logging for Flax
+#labels Status-Accepted,Phase-Design
 
 = Flax Logging =
 
