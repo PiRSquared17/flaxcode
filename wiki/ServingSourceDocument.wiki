@@ -1,6 +1,6 @@
 #summary Serving source files for documents from Flax.
 
-= Service document source files =
+= Serving document source files =
 
 
 Flax does not serve the source files for documents directly. Code for this is available  at revision 368 of http://flaxcode.googlecode.com/svn/trunk/src/cpserver.py. This was removed as it could possibly be  security hole.
