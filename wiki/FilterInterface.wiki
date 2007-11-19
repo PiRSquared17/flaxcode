@@ -1,5 +1,0 @@
-#summary This document describes how Flax extracts text from documents.
-#labels Status-Accepted,Phase-Design
-
-The text of this wiki page has been moved to documentation in svn. 
-see http://flaxcode.googlecode.com/svn/trunk/src/docs/hacking.rst
