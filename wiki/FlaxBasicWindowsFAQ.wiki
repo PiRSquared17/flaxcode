@@ -23,7 +23,11 @@ Flax Basic supports Microsoft Internet Explorer version 6 and above and Mozilla 
 
 * How do I upgrade to a new version of Flax Basic without losing my data?
 
-Uninstall Flax Basic and follow the instructions about upgrading, then install a new version of Flax Basic. The old data will be preserved.
+Uninstall Flax Basic (there is an option in the Programs menu) and follow the instructions about upgrading, then install a new version of Flax Basic. The old data will be preserved.
+
+* I didn't choose to install Flax as a Windows Service. How do I start it running?
+
+If you want to run Flax in the background as a Windows Service, then run the file `C:\Program Files\Flax Basic\startflaxservice.bat` , or start Flax in a command line window by selecting _Start_, _Programs_, _Flax Basic_, Flax Basic (Manual Start) . Remember that once you close this command line window, Flax will stop running.
 
 * How do I back up the Flax Basic databases?
 
@@ -98,4 +102,20 @@ First, make sure Flax Basic is not running. If you installed Flax Basic as a Ser
 `startflax --set-admin-password`
 
 Enter a new password and close the window, then restart the Flax Basic service if necessary by running the file `C:\Program Files\Flax Basic\startflaxservice.bat`
+
+* My indexing stopped unexpectedly!
+
+It's possible that you ran out of disk space while indexing. You will have set a folder for Flax Basic to use for data files at installation time. First, make sure Flax Basic is not running. If you installed Flax Basic as a Service, you can stop it by running the file `C:\Program Files\Flax Basic\stopflaxservice.bat`, if it is running in a command window then close that window. Then you will need to edit the Windows Registry (take care as you can damage your Windows system if this is not done correctly).
+
+Open a command window (_Start_, _Run_, `cmd`) and type:
+
+`regedit`
+
+Open the registry setting at:
+
+`HKEY_LOCAL_MACHINE\SOFTWARE\Lemur Consulting Ltd\Flax Basic\DataPath`
+
+and change this to a folder on a disk drive with enough space. As a rule of thumb, the databases created by Flax will be at least as big as the source files you want to search.
+
+Close the Registry editor and restart the Flax Basic service if necessary by running the file `C:\Program Files\Flax Basic\startflaxservice.bat`, or run the Flax Basic (Manual Start) program from the Programs menu.
 
