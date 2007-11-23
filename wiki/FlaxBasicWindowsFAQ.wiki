@@ -1,7 +1,7 @@
 #summary Frequently Asked Questions for Flax Basic on Windows
 #labels Status-NeedsReview
 
-*General*
+==General==
 
 * How much does Flax Basic cost?
 
@@ -31,19 +31,19 @@ Flax Basic is open-source licensed under the GPL; this means that you can also d
 
 Contact us at http://www.flax.co.uk and we can discuss how we might help you.
 
-*Other search systems*
+==Other search systems==
 
 * Why is Flax Basic different to Google Desktop?
 
 Flax Basic can be run across a network, so you can use it to search files that are shared between computers. Flax Basic also uses a web page interface, so you can easily access it from other computers. Google Desktop is designed to search files on a single computer only, whereas Flax Basic can be used from many computers. The source code for Flax is also freely available.
 
-*More about Flax Basic*
+==More about Flax Basic==
 
 * What is Flax Basic based on?
 
 Flax Basic is based on the Flax search solution platform developed by Lemur Consulting Ltd., an entirely open-source enterprise search system. Flax uses the Xapian search engine library, the CherryPy web application server and the Python programming language to provide a robust, scalable and high-performance search system. 
 
-*Operating Flax Basic*
+==Operating Flax Basic==
 
 * How do I upgrade to a new version of Flax Basic without losing my data?
 
