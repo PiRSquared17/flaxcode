@@ -124,7 +124,7 @@ Close the Registry editor and restart the Flax Basic service if necessary by run
 
 * I have found another problem, how do I find out more and report it?
 
-If you are running Flax as a Windows Service, please check the Event Log to see if a problem has been reported (you can find this in _Start_, _Control Panel_, Administrative Tools_). Check the Application Log for messages about Flax.
+If you are running Flax as a Windows Service, please check the Event Log to see if a problem has been reported (you can find this in _Start_, _Control Panel_, _Administrative Tools_). Check the Application Log for messages about Flax.
 
 You should also check the Flax log files. These are located in the `/logs` subfolder of the Flax installation folder (usually `C:\Program Files\Flax Basic`).
 
