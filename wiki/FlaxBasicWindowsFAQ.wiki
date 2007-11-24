@@ -60,6 +60,7 @@ Flax Basic databases are held in a special 'data' folder (you will have chosen t
 * How do I change the port that Flax Basic uses?
 
 Flax Basic is by default available at port 8090; you can change this as follows: First, make sure Flax Basic is not running. If you installed Flax Basic as a Service, you can stop it by running the file `C:\Program Files\Flax Basic\stopflaxservice.bat`, if it is running in a command window then close that window. Then edit the file `C:\Program Files\Flax Basic\conf\cp.conf` using Windows Notepad - change the `server.socket_port = 8090` line to a different port, and save the file. Restart the Flax Basic service if necessary by running the file `C:\Program Files\Flax Basic\startflaxservice.bat` and Flax should now be available on the new port.
+
  
 * Why can't I index RTF documents on Windows 2000?
 
