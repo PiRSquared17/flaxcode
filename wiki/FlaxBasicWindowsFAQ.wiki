@@ -37,6 +37,10 @@ Contact us at http://www.flax.co.uk and we can discuss how we might help you.
 
 Flax Basic can be run across a network, so you can use it to search files that are shared between computers. Flax Basic also uses a web page interface, so you can easily access it from other computers. Google Desktop is designed to search files on a single computer only, whereas Flax Basic can be used from many computers. The source code for Flax is also freely available.
 
+* Why is Flax Basic different to most other search systems?
+
+Flax Basic and the entire Flax project are entirely free to download, use and modify (under the terms of the [http://en.wikipedia.org/wiki/GPL GPL]). There are no restrictions on the number of computers on which you can install the software, the number of documents you can index or the number of users.
+
 ==More about Flax Basic==
 
 * What is Flax Basic based on?
@@ -74,6 +78,8 @@ Windows 2000 Server does not seem to register the HTML IFilter correctly. Stop i
 
 You may not have the correct IFilter for Adobe Acrobat (PDF) documents installed. This IFilter is included with Acrobat Reader and is also available seperately from Adobe; you can download it from http://download.adobe.com/pub/adobe/acrobat/win/all/ifilter60.exe. After installing this program Flax Basic will be able to install PDF documents.
 
+We have had some reports that the Adobe IFilter installed with Adobe Reader 8 is more reliable - you can obtain Adobe Reader 8 from http://www.adobe.com 
+
 * How fast can I build my indexes?
 
 This will depend on what types of files you want to index. In general, using the IFilter system, indexing PDF files is slowest, and indexing plain text and HTML is fastest. The speed of indexing will also depend on the speed of your system and how much memory is available.
@@ -90,9 +96,15 @@ This means that Flax Basic could not extract the text from some of the files it 
 
 You should then try and open the file specified by <a path to a file> in an appropriate program (i.e., if it is a PDF file try opening it in Acrobat). The file may be malformed or have the wrong extension (i.e. an Excel file saved as .doc) or there may be other errors that prevent the IFilter system from reading it.
 
+* How can I see more detail about the indexing process?
+
+You can change the logging level for the indexing process using the Options page. For example, change the level to INFO to see when the indexing process starts and stops; change it to DEBUG to see when the process indexes each particular file. Note that the higher the log level, the more messages are generated, so the log file can get very large!
+
 * I've seen some errors while indexing PDF files, what does this mean? I have the PDF IFilter installed correctly.
 
 The Adobe IFilter sometimes reports errors while reading certain PDF files. Flax Basic attempts to work around this by reading as much of the rest of the file as possible.
+
+We have had some reports that the Adobe IFilter installed with Adobe Reader 8 is more reliable - you can obtain Adobe Reader 8 from http://www.adobe.com 
 
 * I've seen some other errors, how can I report them and/or find a solution?
 
