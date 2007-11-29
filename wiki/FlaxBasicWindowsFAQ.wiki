@@ -45,9 +45,9 @@ Flax Basic and the entire Flax project are entirely free to download, use and mo
 
 * What is Flax Basic based on?
 
-Flax Basic is based on the Flax search solution platform developed by Lemur Consulting Ltd., an entirely open-source enterprise search system. Flax uses the Xapian search engine library, the CherryPy web application server and the Python programming language to provide a robust, scalable and high-performance search system. 
+Flax Basic is based on the Flax search solution platform developed by Lemur Consulting Ltd., an entirely open-source enterprise search system. Flax uses the [http://www.xapian.org Xapian] search engine library, the [http://www.cherrypy.org CherryPy] web application server and the [http://www.python.org Python] programming language to provide a robust, scalable and high-performance search system. 
 
-==Operating Flax Basic==
+==Getting Started==
 
 * How do I upgrade to a new version of Flax Basic without losing my data?
 
@@ -65,6 +65,24 @@ Flax Basic databases are held in a special 'data' folder (you will have chosen t
 
 Flax Basic is by default available at port 8090; you can change this as follows: First, make sure Flax Basic is not running. If you installed Flax Basic as a Service, you can stop it by running the file `C:\Program Files\Flax Basic\stopflaxservice.bat`, if it is running in a command window then close that window. Then edit the file `C:\Program Files\Flax Basic\conf\cp.conf` using Windows Notepad - change the `server.socket_port = 8090` line to a different port, and save the file. Restart the Flax Basic service if necessary by running the file `C:\Program Files\Flax Basic\startflaxservice.bat` and Flax should now be available on the new port.
 
+* How do I customise the search page(s)?
+
+If you want to change the appearance of any pages you will need to edit the templates in `C:\Program Files\Flax Basic\templates` and the stylesheet in `C:\Program Files\Flax Basic\static\css` (assuming you installed Flax Basic to the default folder). Make a backup of the pages first so you can roll back if you make a mistake! The easiest way to change the appearance of Flax Basic is to edit the `user_banner.html` page, as this is shown at the top of all pages that users see. 
+
+* I've forgotten the password I set during installation, how do I reset it?
+
+First, make sure Flax Basic is not running. If you installed Flax Basic as a Service, you can stop it by running the file `C:\Program Files\Flax Basic\stopflaxservice.bat`, if it is running in a command window then close that window. Then open a command window (_Start_, _Run_, `cmd`) and type:
+
+`cd "C:\Program files\Flax Basic"`
+`startflax --set-admin-password`
+
+Enter a new password and close the window, then restart the Flax Basic service if necessary by running the file `C:\Program Files\Flax Basic\startflaxservice.bat`
+
+==Indexing==
+
+* I've created a collection but no documents are being indexed, why? *
+
+First, if you are using scheduled indexing, try a manual index by pressing the 'Start' button. If no files are found you may have either set the wrong Path or there are no files of the type(s) you selected in the Path.
  
 * Why can't I index RTF documents on Windows 2000?
 
@@ -72,7 +90,7 @@ Windows 2000 does not include the IFilter for RTF documents, which is included w
 
 * Why can't I index HTML documents on Windows 2000 Server?
 
-Windows 2000 Server does not seem to register the HTML IFilter correctly. Stop indexing, register the IFilter by running _Start_, _Run_, `regsvr32 nlhtml.dll`, and restart indexing - the indexing should now work correctly.
+Windows 2000 Server does not seem to register the HTML IFilter correctly. Stop indexing, register the IFilter by running _Start_, _Run_, `regsvr32 nlhtml.dll`, and restart indexing - the indexing should now work correctly. Note: the Flax Basic installation process attempts to perform this process automatically.
 
 * Why can't I index PDF documents?
 
@@ -83,10 +101,6 @@ We have had some reports that the Adobe IFilter installed with Adobe Reader 8 is
 * How fast can I build my indexes?
 
 This will depend on what types of files you want to index. In general, using the IFilter system, indexing PDF files is slowest, and indexing plain text and HTML is fastest. The speed of indexing will also depend on the speed of your system and how much memory is available.
-
-* How do I customise the search page(s)?
-
-If you want to change the appearance of any pages you will need to edit the templates in `C:\Program Files\Flax Basic\templates` and the stylesheet in `C:\Program Files\Flax Basic\static\css` (assuming you installed Flax Basic to the default folder). Make a backup of the pages first so you can roll back if you make a mistake! The easiest way to change the appearance of Flax Basic is to edit the `user_banner.html` page, as this is shown at the top of all pages that users see. 
 
 * I've seen some errors while indexing, what does this mean?
 
@@ -110,15 +124,6 @@ We have had some reports that the Adobe IFilter installed with Adobe Reader 8 is
 
 If you have seen other errors while using Flax, please visit http://www.flax.co.uk to report them. We will endeavour to provide fixes and workarounds and will use the information to contribute to Flax's ongoing improvement.
 
-* I've forgotten the password I set during installation, how do I reset it?
-
-First, make sure Flax Basic is not running. If you installed Flax Basic as a Service, you can stop it by running the file `C:\Program Files\Flax Basic\stopflaxservice.bat`, if it is running in a command window then close that window. Then open a command window (_Start_, _Run_, `cmd`) and type:
-
-`cd "C:\Program files\Flax Basic"`
-`startflax --set-admin-password`
-
-Enter a new password and close the window, then restart the Flax Basic service if necessary by running the file `C:\Program Files\Flax Basic\startflaxservice.bat`
-
 * My indexing stopped unexpectedly!
 
 It's possible that you ran out of disk space while indexing. You will have set a folder for Flax Basic to use for data files at installation time. First, make sure Flax Basic is not running. If you installed Flax Basic as a Service, you can stop it by running the file `C:\Program Files\Flax Basic\stopflaxservice.bat`, if it is running in a command window then close that window. Then you will need to edit the Windows Registry (take care as you can damage your Windows system if this is not done correctly).
@@ -134,6 +139,8 @@ Open the registry setting at:
 and change this to a folder on a disk drive with enough space. As a rule of thumb, the databases created by Flax will be at least as big as the source files you want to search.
 
 Close the Registry editor and restart the Flax Basic service if necessary by running the file `C:\Program Files\Flax Basic\startflaxservice.bat`, or run the Flax Basic (Manual Start) program from the Programs menu.
+
+==Troubleshooting==
 
 * I have found another problem, how do I find out more and report it?
 
