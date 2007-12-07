@@ -140,6 +140,10 @@ and change this to a folder on a disk drive with enough space. As a rule of thum
 
 Close the Registry editor and restart the Flax Basic service if necessary by running the file `C:\Program Files\Flax Basic\startflaxservice.bat`, or run the Flax Basic (Manual Start) program from the Programs menu.
 
+== I tried to create a collection but got an error 'A collection of this name is currently being deleted' ==
+
+You will have previously deleted a collection of the same name, and the previous collection is still be cleared up - possibly because someone else is still searching it. Either use a different name for the new collection or restart Windows (on startup the old collection will be removed).
+
 ==Troubleshooting==
 
 * I have found another problem, how do I find out more and report it?
