@@ -83,6 +83,7 @@ Enter a new password and close the window, then restart the Flax Basic service i
 * I've created a collection but no documents are being indexed, why? *
 
 First, if you are using scheduled indexing, try a manual index by pressing the 'Start' button. If no files are found you may have either set the wrong Path or there are no files of the type(s) you selected in the Path.
+
  
 * Why can't I index RTF documents on Windows 2000?
 
