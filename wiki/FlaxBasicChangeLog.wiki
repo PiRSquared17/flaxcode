@@ -1,0 +1,7 @@
+#summary An overall change log showing new versions as they appear. We are currently in a pre-release phase, so expect new versions often.
+
+= Flax Basic Change Log =
+
+14th December 2007 - v.0.9.892 - fixed issues with installer, should now automatically start Flax as a service in all cases
+
+7th December 2007 - v0.9.891 - first available version for Windows
