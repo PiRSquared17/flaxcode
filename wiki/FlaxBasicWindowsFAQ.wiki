@@ -84,6 +84,18 @@ Enter a new password and close the window, then restart the Flax Basic service i
 
 First, if you are using scheduled indexing, try a manual index by pressing the 'Start' button. If no files are found you may have either set the wrong Path or there are no files of the type(s) you selected in the Path.
 
+
+* Why can't I index documents in a Windows shared folder?
+
+Make sure you specify the shared folder correctly in the Path box of the Collection, as
+
+`\\servername\foldername`
+
+If you are running Flax as a Windows Service, you will also need to make sure the Service has suitable account details to access the share. Flax is installed by default to use the 'Local System' account, which won't usually be able to access shared folders.
+
+To change the account that Flax uses, select Administrative Tools from the Control Panel, then the Services applet. Find the Flax Service and right-click, then select Properties and the Logon tab. Check the 'This account' radio button and enter a suitable username and password (i.e., one that is allowed to access the shared folder you are trying to index). Click OK. You will then have to restart the Flax Service - right-click and select 'Stop', then right-click and select 'Start'.
+
+Note that in some situations you (or your network administrator) may want to create a special user account for Flax that can access all the files you wish to search. 
  
 * Why can't I index RTF documents on Windows 2000?
 
