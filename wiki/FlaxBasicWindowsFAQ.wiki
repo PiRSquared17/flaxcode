@@ -29,7 +29,7 @@ Flax Basic is open-source licensed under the GPL; this means that you can also d
 
 * I would like a feature that is not available in Flax Basic
 
-Contact us at http://www.flax.co.uk and we can discuss how we might help you.
+The technology that Flax Basic uses (the <a href=http://www.xapian.org target=_blank>Xapian</a> search engine library and the <a href=http://www.xappy.org>Xappy</a> interface library allow a huge range of search engine functions. Contact us at http://www.flax.co.uk and we can discuss how we might help you.
 
 ==Other search systems==
 
@@ -69,6 +69,10 @@ Flax Basic is by default available at port 8090; you can change this as follows:
 
 If you want to change the appearance of any pages you will need to edit the templates in `C:\Program Files\Flax Basic\templates` and the stylesheet in `C:\Program Files\Flax Basic\static\css` (assuming you installed Flax Basic to the default folder). Make a backup of the pages first so you can roll back if you make a mistake! The easiest way to change the appearance of Flax Basic is to edit the `user_banner.html` page, as this is shown at the top of all pages that users see. 
 
+* I can't set a password during installation
+
+Did you try entering a password? The password isn't actually shown as you type it. Try un-installing Flax and re-installing; when you are asked for a password type it in, press Enter, then repeat the process.
+
 * I've forgotten the password I set during installation, how do I reset it?
 
 First, make sure Flax Basic is not running. If you installed Flax Basic as a Service, you can stop it by running the file `C:\Program Files\Flax Basic\stopflaxservice.bat`, if it is running in a command window then close that window. Then open a command window (_Start_, _Run_, `cmd`) and type:
@@ -76,7 +80,7 @@ First, make sure Flax Basic is not running. If you installed Flax Basic as a Ser
 `cd "C:\Program files\Flax Basic"`
 `startflax --set-admin-password`
 
-Enter a new password and close the window, then restart the Flax Basic service if necessary by running the file `C:\Program Files\Flax Basic\startflaxservice.bat`
+Enter a new password and close the window, then restart the Flax Basic service if necessary by running the file `C:\Program Files\Flax Basic\startflaxservice.bat` . Remember the password won't be displayed as you type it.
 
 ==Indexing==
 
