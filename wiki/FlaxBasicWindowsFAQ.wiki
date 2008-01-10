@@ -29,7 +29,7 @@ Flax Basic is open-source licensed under the GPL; this means that you can also d
 
 * I would like a feature that is not available in Flax Basic
 
-The technology that Flax Basic uses (the [http://www.xapian.org Xapian] search engine library and the [http://www.xappy.org Xappy] interface library allow a huge range of search engine functions. [http://www.flax.co.uk Contact us] and we can discuss how we might help you.
+The technology that Flax Basic uses (the [http://www.xapian.org Xapian] search engine library and the [http://www.xappy.org Xappy] interface library) allow a huge range of search engine functions, far more than are currently available in Flax Basic. [http://www.flax.co.uk Contact us] and we can discuss how we might help you.
 
 ==Other search systems==
 
