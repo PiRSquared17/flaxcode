@@ -1,6 +1,8 @@
-#summary An overall change log showing new versions as they appear. We are currently in a pre-release phase, so expect new versions often.
+#summary An overall change log showing new versions as they appear.
 
 = Flax Basic Change Log =
+
+28th January 2008 - v.1.0.0 - some small bug fixes and a new directory browser to ease the selection of files for indexing. First 'official' release.
 
 14th December 2007 - v.0.9.892 - fixed issues with installer, should now automatically start Flax as a service in all cases
 
