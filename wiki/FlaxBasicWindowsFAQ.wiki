@@ -69,13 +69,13 @@ Flax Basic is by default available at port 8090; you can change this as follows:
 
 If you have an existing website (for example `www.mydomain.com`) run on IIS and want to use Flax Basic on the same computer, you can use the following method to set up a Reverse Proxy; this will mean that visitors to your website will see the Flax search pages at `www.mydomain.com/search`
 
-Download and install Isapi_Rewrite from http://www.helicontech.com - this is not free software, but the cost for a license is very low (£70). You will then need to edit the httpd.conf file that controls all the functions of Isapi_Rewrite and add the following lines:
+We have successfully used Isapi Rewrite from http://www.helicontech.com - this is not free software, but the cost for a license is very low (£70). You will then need to edit the httpd.conf file that controls all the functions of Isapi Rewrite and add the following lines:
 {{{
 RewriteEngine on
 RewriteBase /
 RewriteRule (.+) http://a.b.c.d:8090/$1 [NC,P]  
 }}}
-where a.b.c.d. is the IP address of the server running Flax. Note that there are many, many different ways of setting up the proxy, refer to the Isapi_Rewrite documentation and forums for more information.
+where a.b.c.d. is the IP address of the server running Flax. Note that there are many, many different ways of setting up this kind of proxy, refer to the Isapi Rewrite documentation and forums for more information.
 
 * How do I customise the search page(s)?
 
