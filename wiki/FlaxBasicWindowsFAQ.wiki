@@ -23,6 +23,10 @@ Given sufficient memory and hard disk space, Flax Basic can build indexes of mil
 
 Flax Basic currently reads Microsoft Word, Microsoft Excel, Microsoft Powerpoint, plain text, Rich Text Format (RTF), HTML and Adobe Acrobat (PDF) documents. Flax Basic uses the Microsoft IFilter system which is installed with all modern versions of Windows. Note that on some systems the RTF IFilter may not be present (see below) and on most systems the PDF IFilter will not be present unless Acrobat Reader is installed (see below).
 
+* How would I use Flax Basic in my organisation?
+
+You can use Flax Basic to provide a search facility for individuals (installed on their computer and searching the documents on their computer) or across the whole organisation (installed on a server and searching shared or publically available documents), or a combination of the two.
+
 * Can I modify or extend Flax Basic?
 
 Flax Basic is open-source licensed under the GPL; this means that you can also download the source code to Flax Basic (see http://www.flax.co.uk for details) and modify it to your requirements. However if you distribute this modified code you must also distribute the source code. If your modifications will be of benefit to other users, you can submit them to the Flax project and they may be incorporated into the next release of the software.
