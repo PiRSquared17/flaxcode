@@ -106,7 +106,7 @@ First, if you are using scheduled indexing, try a manual index by pressing the '
 
 * I'm using scheduled indexing but no documents are being indexed, although the collection is shown as 'Due' *
 
-Remember that when using scheduled indexing, any of the time settings that _do not_ contain a number will need a asterisk or * - otherwise no indexing will happen. For example, to perform an index at 3am every Wednesday, set the fields as follows:
+Remember that when using scheduled indexing, any of the time settings that _do not_ contain a number will need a asterisk - otherwise no indexing will happen. For example, to perform an index at 3am every Wednesday, set the fields as follows:
 {{{
 Minutes: *
 Hours: 3
