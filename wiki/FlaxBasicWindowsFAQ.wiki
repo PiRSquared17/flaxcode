@@ -104,6 +104,15 @@ Enter a new password and close the window, then restart the Flax Basic service i
 
 First, if you are using scheduled indexing, try a manual index by pressing the 'Start' button. If no files are found you may have either set the wrong Path or there are no files of the type(s) you selected in the Path.
 
+* I'm using scheduled indexing but no documents are being indexed, although the collection is shown as 'Due' *
+
+Remember that when using scheduled indexing, any of the time settings that _do not_ contain a number will need a '*' - otherwise no indexing will happen. For example, to perform an index at 3am every Wednesday, set the fields as follows:
+
+Minutes: *
+Hours: 3
+Weekdays: 2
+Monthdays: *
+Months: *
 
 * Why can't I index documents in a Windows shared folder?
 
