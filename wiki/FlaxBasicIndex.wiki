@@ -11,7 +11,7 @@ You can get a packaged version of Flax Basic for Microsoft Windows from the [htt
 
 = Documentation =
 
- * FlaxBasicWindowsFAQ Frequently Asked Questions for Flax Basic on Windows
+ * FlaxBasicWindowsFaq Frequently Asked Questions for Flax Basic on Windows
  * [http://www.flax.co.uk/docs/1.0.0/reference.html Reference Manual ]
  * FlaxBasicChangeLog shows all new versions as they appear
 
