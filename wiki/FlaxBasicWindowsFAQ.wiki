@@ -1,5 +1,5 @@
 #summary Frequently Asked Questions for Flax Basic on Windows
-#labels Status-NeedsReview
+#labels Deprecated
 
 ==General==
 
