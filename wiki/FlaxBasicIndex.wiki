@@ -7,7 +7,7 @@ Flax Basic is a simple application that allows you to build searchable databases
 
 = Get Flax Basic =
 
-You can get a packaged version of Flax Basic for Microsoft Windows from the [http://code.google.com/p/flaxcode/downloads/list Downloads tab]. Flax Basic will also work on Unix or Mac, but you will need to download compile the [http://code.google.com/p/flaxcode/source/browse/ source code].
+You can get a packaged version of Flax Basic for Microsoft Windows from the [http://code.google.com/p/flaxcode/downloads/list Downloads tab]. Flax Basic will also work on Unix or Mac, but you will need to download and compile the [http://code.google.com/p/flaxcode/source/browse/ source code].
 
 = Documentation =
 
@@ -17,4 +17,4 @@ You can get a packaged version of Flax Basic for Microsoft Windows from the [htt
 
 = Mailing Lists = 
 
-[http://groups.google.co.uk/group/flax-discuss Flax-discuss] mailing list on Google Groups
+You can join the [http://groups.google.co.uk/group/flax-discuss Flax-discuss] mailing list on Google Groups
