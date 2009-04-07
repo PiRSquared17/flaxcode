@@ -2,7 +2,6 @@
 
 = Introduction =
 
-
-
+Flax Search Server is currently under development and will be available soon.
 
 = Details =
