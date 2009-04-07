@@ -2,7 +2,7 @@
 
 = Introduction =
 
-
+The PHP client libraries for Flax Search Server are currently under development and will be available soon.
 
 
 = Details =
