@@ -5,3 +5,5 @@
 Flax Search Server is currently under development and will be available soon.
 
 = Details =
+
+See http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_service for the search service, and http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_clients for clients in PHP (working) and Python (not yet complete).
