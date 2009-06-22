@@ -2,7 +2,14 @@
 
 = Introduction =
 
-The PHP client libraries for Flax Search Server are currently under development and will be available soon.
+Flax Search Server and the PHP client are now available as an alpha release, see the Downloads area:
+ * http://code.google.com/p/flaxcode/downloads/list
 
+= Documentation = 
 
-= Details =
+ * PHP tutorial http://code.google.com/p/flaxcode/source/browse/trunk/flax_search_clients/php/docs/tutorial/tutorial.rst
+ * PHP examples http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_clients/php/examples
+
+= Source =
+
+ * http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_clients/php
