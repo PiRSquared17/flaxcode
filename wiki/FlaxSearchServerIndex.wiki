@@ -9,6 +9,9 @@ Flax Search Server is now available as an alpha release, see the Downloads area:
 
 API: 
  * http://code.google.com/p/flaxcode/source/browse/trunk/flax_search_service/docs/api.rst
+Client documentation:
+ * PHP tutorial http://code.google.com/p/flaxcode/source/browse/trunk/flax_search_clients/php/docs/tutorial/tutorial.rst
+ * PHP examples http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_clients/php/examples
 
 = Source =
 
@@ -16,4 +19,4 @@ Flax Search Service:
  * http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_service 
 Clients:
  * PHP http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_clients/php
- * Python http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_clients/python
+ * Python http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_clients/python (in development)
