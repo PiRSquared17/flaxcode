@@ -1,0 +1,21 @@
+#summary Index of pages relating to Flax Search Service
+
+= Introduction =
+
+Flax Search Service is now available as an alpha release, see the [http://code.google.com/p/flaxcode/downloads/list Downloads] area.
+
+= Documentation = 
+
+API: 
+ * [http://code.google.com/p/flaxcode/source/browse/trunk/flax_search_service/docs/api.rst API]
+Client documentation:
+ * [http://code.google.com/p/flaxcode/source/browse/trunk/flax_search_clients/php/docs/tutorial/tutorial.rst PHP tutorial]
+ * [http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_clients/php/examples PHP examples]
+
+= Source =
+
+ * [http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_service Flax Search Service] 
+Clients:
+ * [http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_clients/php PHP]
+ * [http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_clients/perl Perl]
+ * [http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_clients/python Python] (in development)
