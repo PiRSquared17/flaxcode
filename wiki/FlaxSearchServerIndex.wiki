@@ -1,8 +1,12 @@
 #summary Index of pages relating to FlaxSearchServer
+#labels Featured
 
 = Introduction =
 
-Flax Search Server is now available as an alpha release, see the [http://code.google.com/p/flaxcode/downloads/list Downloads] area.
+Flax Search Server is now available as an alpha release:
+
+ * [http://flaxcode.googlecode.com/files/flax-search-clients-0.1.0-alpha.tgz]
+ * [http://flaxcode.googlecode.com/files/flax-search-service-0.1.0-alpha.tgz]
 
 = Documentation = 
 
