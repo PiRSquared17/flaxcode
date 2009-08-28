@@ -142,6 +142,12 @@ You may not have the correct IFilter for Adobe Acrobat (PDF) documents installed
 
 We have had some reports that the Adobe IFilter installed with Adobe Reader 8 is more reliable - you can obtain Adobe Reader 8 from http://www.adobe.com 
 
+* Why can't I index Office 2007 documents?
+
+This feature was added to Flax Basic for version 1.1, please make sure you are using the newest version. Also, you may not have the correct IFilter for Office 2007 installed. You can download a filter pack from 
+http://www.microsoft.com/downloads/details.aspx?FamilyId=60C92A37-719C-4077-B5C6-CAC34F4227CC&displaylang=en 
+After installing this program Flax Basic will be able to index Office 2007 documents.
+
 * How fast can I build my indexes?
 
 This will depend on what types of files you want to index. In general, using the IFilter system, indexing PDF files is slowest, and indexing plain text and HTML is fastest. The speed of indexing will also depend on the speed of your system and how much memory is available.
