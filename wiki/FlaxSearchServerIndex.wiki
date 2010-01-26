@@ -20,6 +20,6 @@ Client documentation:
 
  * [http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_service Flax Search Service] 
 Clients:
- * [http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_clients/php PHP]
- * [http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_clients/perl Perl]
- * [http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_clients/python Python] (in development)
+ * [http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_service/clients/php PHP]
+ * [http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_service/clients/perl Perl]
+ * [http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_service/clients/python Python] (in development)
