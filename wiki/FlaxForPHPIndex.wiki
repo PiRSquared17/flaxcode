@@ -8,9 +8,9 @@ Flax Search Server and the PHP client are now available as an alpha release, see
 
 = Documentation = 
 
- * [http://code.google.com/p/flaxcode/source/browse/trunk/flax_search_clients/php/docs/tutorial/tutorial.rst PHP tutorial]
- * [http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_clients/php/examples PHP examples]
+ * [http://code.google.com/p/flaxcode/source/browse/trunk/flax_search_service/clients/php/docs/tutorial/tutorial.rst PHP tutorial]
+ * [http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_service/clients/php/examples PHP examples]
 
 = Source =
 
- * [http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_clients/php Source for the PHP client]
+ * [http://code.google.com/p/flaxcode/source/browse/#svn/trunk/flax_search_service/clients/php Source for the PHP client]
